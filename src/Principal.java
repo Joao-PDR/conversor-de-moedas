@@ -1,8 +1,29 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import java.util.Scanner;
 
 public class Principal {
+
+    //Metodo para realizar a conversão
+    public static void converterMoeda(String moedaBase, String moedaAlvo, double valor, ConsultaMoeda consulta) {
+        String jsonResposta = consulta.buscaCotacao(moedaBase);
+
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(jsonResposta, JsonObject.class);
+        JsonObject conversionRates = jsonObject.getAsJsonObject("conversion_rates");
+        double taxa = conversionRates.get(moedaAlvo).getAsDouble();
+
+        double valorConvertido = valor * taxa;
+
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("%.2f %s corresponde ao valor de %.2f %s %n", valor, moedaBase, valorConvertido, moedaAlvo);
+        System.out.println("--------------------------------------------------------------------");
+    }
+
     public static void main(String[] args) {
         Scanner leitura = new Scanner(System.in);
+        ConsultaMoeda consulta = new ConsultaMoeda();
         int opcao = 0;
 
         String menu = """
@@ -27,35 +48,33 @@ public class Principal {
 
             if (opcao >= 1 && opcao <= 6) {
                 System.out.println("Digite o valor que deseja converter:");
-                double valor = leitura.nextDouble(); // Lê um valor com casas decimais
+                double valor = leitura.nextDouble();
 
-                // Futuramente, aqui virá a lógica de conversão
+                // Lógica de conversão agora está mais limpa
                 switch (opcao) {
-                    case 1:
-                        System.out.println("Valor de " + valor + " [USD] corresponde a ... [BRL]");
+                    case 1: // Dólar para Real
+                        converterMoeda("USD", "BRL", valor, consulta);
                         break;
-                    case 2:
-                        System.out.println("Valor de " + valor + " [BRL] corresponde a ... [USD]");
+                    case 2: // Real para Dólar
+                        converterMoeda("BRL", "USD", valor, consulta);
                         break;
-                    case 3:
-                        // etc...
+                    case 3: // Dólar para Euro
+                        converterMoeda("USD", "EUR", valor, consulta);
                         break;
-                    case 4:
-                        // etc...
+                    case 4: // Euro para Dólar
+                        converterMoeda("EUR", "USD", valor, consulta);
                         break;
-                    case 5:
-                        // etc...
+                    case 5: // Dólar para Peso Argentino
+                        converterMoeda("USD", "ARS", valor, consulta);
                         break;
-                    case 6:
-                        // etc...
+                    case 6: // Peso Argentino para Dólar
+                        converterMoeda("ARS", "USD", valor, consulta);
                         break;
                 }
-
             } else if (opcao != 7) {
                 System.out.println("Opção inválida!");
             }
         }
-
         System.out.println("Programa finalizado.");
         leitura.close();
     }
