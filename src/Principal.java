@@ -32,12 +32,10 @@ public class Principal {
                 // Futuramente, aqui virá a lógica de conversão
                 switch (opcao) {
                     case 1:
-                        // Lógica para Dólar para Real
-                        System.out.println("Valor de " + valor + " [USD] corresponde a ... [BRL]"); // MUDANÇA AQUI
+                        System.out.println("Valor de " + valor + " [USD] corresponde a ... [BRL]");
                         break;
                     case 2:
-                        // Lógica para Real para Dólar
-                        System.out.println("Valor de " + valor + " [BRL] corresponde a ... [USD]"); // MUDANÇA AQUI
+                        System.out.println("Valor de " + valor + " [BRL] corresponde a ... [USD]");
                         break;
                     case 3:
                         // etc...
