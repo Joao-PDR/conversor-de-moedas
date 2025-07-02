@@ -25,3 +25,12 @@ Projeto desenvolvido como parte do Challenge de Java da Alura em parceria com a 
 1. Clone o repositório:
    ```bash
    git clone [https://github.com/Joao-PDR/conversor-de-moedas.git](https://github.com/Joao-PDR/conversor-de-moedas.git)
+2. Abra o projeto na sua IDE Java (ex: IntelliJ IDEA).
+
+3. Adicione a biblioteca Gson 2.10.1 ao projeto.
+
+4. Crie uma conta na ExchangeRate-API para obter sua própria API Key.
+
+5. Na classe ConsultaMoeda.java, substitua o texto "SUA_CHAVE_API" pela sua chave.
+
+6. Execute a classe Principal.java.
